@@ -44,3 +44,4 @@ group :development do
 end
 
 gem 'slim-rails'
+gem 'sorcery'
