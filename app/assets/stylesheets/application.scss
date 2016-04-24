@@ -11,8 +11,11 @@
  * file per style scope.
  *
  */
-
 @import "bootstrap-sprockets";
+
+/* $body-bg: #00ff00; */
+/* $text-color: #aaaaaa; */
+
 @import "bootstrap";
 
 @import "sessions";
