@@ -1,3 +1,13 @@
 .row.signin-form-block
   .col-md-12
-    = render 'form'
+    .row
+      .col-md-12
+        h1.text-center kozeni
+
+    .row
+      .col-md-12
+        = render 'form'
+
+    .row
+      .col-md-12
+        = link_to('Register', new_user_path)

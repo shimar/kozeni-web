@@ -7,8 +7,10 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def authnenticated?
-    # TODO
+  def require_login
+    unless current_user
+      redirect_to welcome_path
+    end
   end
 
 end
