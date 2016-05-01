@@ -47,3 +47,4 @@ end
 gem 'slim-rails'
 gem 'sorcery'
 gem 'bootstrap-sass'
+gem 'simple_form'
