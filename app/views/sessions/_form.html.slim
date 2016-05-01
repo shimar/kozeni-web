@@ -1,10 +1,8 @@
 = form_tag signin_path, method: :post do
-  .field
-    = label_tag :email
-    = text_field_tag :email
-  .field
-    = label_tag :password
-    = password_field_tag :password
+  .form-group
+    = text_field_tag :email, '', class: 'form-control', placeholder: 'Email Address'
+  .form-group
+    = password_field_tag :password, '', class: 'form-control', placeholder: 'Password'
 
-  .actions
-    = submit_tag "Signin"
+  .form-group
+    = submit_tag "Signin", class: 'btn btn-primary'
