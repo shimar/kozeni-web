@@ -1,0 +1,10 @@
+= simple_form_for(@user) do |f|
+  .form-group
+    = f.input :email
+  .form-group
+    = f.input :password
+  .form-group
+    = f.input :password_confirmation
+  .form-group
+    = f.submit('Signup', class: 'btn btn-primary')
+    = link_to('Cancel', welcome_path)
