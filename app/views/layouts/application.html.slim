@@ -6,8 +6,12 @@ html
     = csrf_meta_tags
 
   body
-    .container-fluid.unsigned
-      .row
-        .col-md-12
-          == yield
+    #wrapper.unsigned
+      #sidebar-wrapper
+        = render 'shared/sidebar'
+      #page-content-wrapper
+        .container-fluid
+          .row
+            .col-lg-12
+              == yield
     = javascript_include_tag 'application'
