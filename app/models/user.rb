@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  # associations.
+  has_many :categories
+
   authenticates_with_sorcery!
 
   validates :email,
