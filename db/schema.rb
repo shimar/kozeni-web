@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160510152552) do
+ActiveRecord::Schema.define(version: 20160510154253) do
 
   create_table "categories", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -21,6 +21,29 @@ ActiveRecord::Schema.define(version: 20160510152552) do
   end
 
   add_index "categories", ["user_id"], name: "index_categories_on_user_id", using: :btree
+
+  create_table "incomes", force: :cascade do |t|
+    t.integer  "user_id",     limit: 4
+    t.integer  "category_id", limit: 4
+    t.date     "date"
+    t.integer  "amount",      limit: 4
+    t.boolean  "planned",               default: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+  end
+
+  add_index "incomes", ["user_id"], name: "index_incomes_on_user_id", using: :btree
+
+  create_table "outgos", force: :cascade do |t|
+    t.integer  "user_id",     limit: 4
+    t.integer  "category_id", limit: 4
+    t.integer  "amount",      limit: 4
+    t.boolean  "planned"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "outgos", ["user_id"], name: "index_outgos_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",            limit: 255, null: false

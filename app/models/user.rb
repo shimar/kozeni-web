@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   # associations.
   has_many :categories
+  has_many :incomes
+  has_many :outgos
 
   authenticates_with_sorcery!
 
