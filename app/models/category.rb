@@ -1,7 +1,7 @@
 class Category < ActiveRecord::Base
   # associations.
   has_many   :incomes
-  has_many   :outgos
+  has_many   :outgoes
   belongs_to :user
 
   # validations

@@ -1,14 +1,15 @@
-class CreateOutgos < ActiveRecord::Migration
+class CreateOutgoes < ActiveRecord::Migration
   def change
-    create_table :outgos do |t|
+    create_table :outgoes do |t|
       t.integer :user_id
       t.integer :category_id
+      t.date    :date
       t.integer :amount
       t.boolean :planned
 
       t.timestamps null: false
     end
 
-    add_index :outgos, :user_id
+    add_index :outgoes, :user_id
   end
 end
