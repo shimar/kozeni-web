@@ -10,9 +10,9 @@ class OutgoesController < ApplicationController
   def create
     category_name = outgo_params[:category]
     category = current_user.categories.find_or_create_by(name: category_name)
-    outgo = Outgo.new(user_id: current_user.id, date: outgo_params[:date], amount: outgo_params[:amount])
-    outgo.category = category
-    outgo.save
+    @outgo = Outgo.new(user_id: current_user.id, date: outgo_params[:date], amount: outgo_params[:amount])
+    @outgo.category = category
+    @outgo.save
   end
 
   def update
