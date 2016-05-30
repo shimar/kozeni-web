@@ -7,4 +7,8 @@ class Income < ActiveRecord::Base
   scope :ym, -> (date) {
     where("YEAR(date) = ? AND MONTH(date) = ?", date.year, date.month)
   }
+
+  scope :amount_by_day, -> {
+    group(:date).sum(:amount)
+  }
 end
