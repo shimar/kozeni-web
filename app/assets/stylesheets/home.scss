@@ -1,3 +1,18 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+table#balances {
+    tr {
+        td {
+            padding: 2px;
+            &:nth-child(1),
+            &:nth-child(3) {
+                text-align: right;
+            }
+            &:nth-child(2) {
+                text-align: center;
+            }
+        }
+    }
+}
