@@ -10,16 +10,19 @@
     h4 outgoes
   .col-md-3
     h4 incomes
-    p
+    div
       = number_with_delimiter @sum_incomes
   .col-md-3
     h4 outgoes
-    p
+    div
       = number_with_delimiter @sum_outgoes
 
 .row
   .col-md-12
-    = render('item_form')
+    = render 'item_form'
 
 .row
-  .col-md-12
+  .col-md-6
+    / budgets
+  .col-md-6
+    = render 'daily_balances'
