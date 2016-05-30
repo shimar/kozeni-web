@@ -5,6 +5,10 @@ class HomeController < ApplicationController
     @item = ItemForm.new(user_id: current_user.id, date: @date)
     @incomes = current_user.incomes.includes(:category).ym(@date).amount_by_day
     @outgoes = current_user.outgoes.includes(:category).ym(@date).amount_by_day
+
+    @sum_incomes = current_user.incomes.ym(@date).sum_amount
+    @sum_outgoes = current_user.outgoes.ym(@date).sum_amount
+
     @incomes.each do |i|
       @balances[i[0]][:incomes]= i[1]
     end

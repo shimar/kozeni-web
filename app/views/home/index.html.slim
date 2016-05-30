@@ -5,13 +5,17 @@
         = l(@date)
 .row
   .col-md-3
-    h4 income
+    h4 incomes
   .col-md-3
-    h4 outgo
+    h4 outgoes
   .col-md-3
-    h4 income
+    h4 incomes
+    p
+      = number_with_delimiter @sum_incomes
   .col-md-3
-    h4 outgo
+    h4 outgoes
+    p
+      = number_with_delimiter @sum_outgoes
 
 .row
   .col-md-12

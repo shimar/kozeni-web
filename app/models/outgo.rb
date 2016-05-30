@@ -8,6 +8,10 @@ class Outgo < ActiveRecord::Base
     where("YEAR(date) = ? AND MONTH(date) = ?", date.year, date.month)
   }
 
+  scope :sum_amount, -> {
+    sum(:amount)
+  }
+
   scope :amount_by_day, -> {
     group(:date).sum(:amount)
   }
