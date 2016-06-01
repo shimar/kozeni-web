@@ -9,17 +9,31 @@ RSpec.describe SessionsController, type: :controller do
     end
   end
 
-  describe "GET #create" do
+  describe "POST #create" do
     it "returns http success" do
-      get :create
+      post :create
       expect(response).to have_http_status(:success)
     end
   end
 
-  describe "GET #destroy" do
-    it "returns http success" do
-      get :destroy
-      expect(response).to have_http_status(:success)
+  describe "DELETE #destroy" do
+    it "returns 302 if user not loggedin." do
+      delete :destroy
+      expect(response.status).to eq 302
+    end
+
+    describe "when user loggedin," do
+      before do
+        @user = User.new(email: 'test@test.com', password: 'testtest', password_confirmation: 'testtest')
+        @user.save
+        @controller.login(@user.email, 'testtest')
+      end
+
+      it "returns 302 and redirect_to welcome_path." do
+        delete :destroy
+        expect(response.status).to eq 302
+        expect(response).to redirect_to welcome_path
+      end
     end
   end
 
