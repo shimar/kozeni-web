@@ -8,20 +8,13 @@ table#balances {
             padding: 2px;
             vertical-align: middle;
             &:nth-child(1) {
-                text-align: center;
-                min-width: 28px;
-                width: 28px;
-                div {
-                    background-color: $brand-info;
-                    width: 24px;
-                    height: 24px;
-                    border-radius: 24px;
-                    margin: 0 auto;
-                }
+                text-align: right;
+                width: 10%;
             }
             &:nth-child(2),
             &:nth-child(3) {
                 text-align: right;
+                width: 45%;
             }
         }
     }

@@ -1,9 +1,8 @@
-table#balances.table.table-condensed
+table#balances.table.table-condensed.table-striped
   - @balances.each do |day, values|
     tr
       td
-        div
-          = day.day
+        = day.day
       td
         = number_with_delimiter values[:incomes]
       td
