@@ -3,7 +3,6 @@ ul.sidebar-nav
     = link_to('Kozeni', root_path)
 
   li
-    = link_to(fa_icon('cog', text: "settings"), '#')
+    = link_to(fa_icon('cog', text: "Settings"), '#')
   li
-    = link_to(fa_icon('sign-out', text: "logout"), signout_path, method: :delete)
-
+    = link_to(fa_icon('sign-out', text: "Sign out"), signout_path, method: :delete)
