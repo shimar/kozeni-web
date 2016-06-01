@@ -24,9 +24,7 @@ RSpec.describe SessionsController, type: :controller do
 
     describe "when user loggedin," do
       before do
-        @user = User.new(email: 'test@test.com', password: 'testtest', password_confirmation: 'testtest')
-        @user.save
-        @controller.login(@user.email, 'testtest')
+        user_signed
       end
 
       it "returns 302 and redirect_to welcome_path." do
