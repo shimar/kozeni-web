@@ -4,3 +4,6 @@ ul.sidebar-nav
 
   li
     = link_to(fa_icon('cog', text: "settings"), '#')
+  li
+    = link_to(fa_icon('sign-out', text: "logout"), signout_path, method: :delete)
+
