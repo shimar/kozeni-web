@@ -1,13 +1,14 @@
 / _item_form.html.slim
-= simple_form_for(@item, url: incomes_path, html: { class: 'form-inline' }) do |f|
-  .form-group
-    = f.input_field :date, class: 'form-control', data: { date_format: 'YYYY/MM/DD' }
+div.item_form-block
+  = simple_form_for(@item, url: incomes_path, html: { class: 'form-inline' }) do |f|
+    .form-group
+      = f.input_field :date, class: 'form-control', data: { date_format: 'YYYY/MM/DD' }
 
-  .form-group
-    = f.input_field :category, class: 'form-control'
+    .form-group
+      = f.input_field :category, class: 'form-control'
 
-  .form-group
-    = f.input_field :amount, as: :integer, class: 'form-control'
+    .form-group
+      = f.input_field :amount, as: :integer, class: 'form-control'
 
-  = f.input_field :user_id, as: :hidden
-  = f.button :submit, value: '送信', class: 'btn btn-primary'
+    = f.input_field :user_id, as: :hidden
+    = f.button :submit, value: '送信', class: 'btn btn-primary'
