@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get    'welcome' => 'sessions#new'
   post   'signin'  => 'sessions#create'
   delete 'signout' => 'sessions#destroy'
+
   resources :users
   resources :incomes, excepts: [ :new, :edit ], defaults: { format: :json }
   resources :outgoes, excepts: [ :new, :edit ], defaults: { format: :json }
