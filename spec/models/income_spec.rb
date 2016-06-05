@@ -56,4 +56,42 @@ RSpec.describe Income, type: :model do
       end
     end
   end
+
+  describe "as InfluentialInMonthlyBalance" do
+    describe "find_or_initialize_monthly_balance" do
+      before do
+        @model = build(:income)
+      end
+
+      context "when the monthly balance exists," do
+        before do
+          today = Date.today
+          @exists = create(:balance,
+                           type: 'MonthlyBalance',
+                           date: today.beginning_of_month,
+                           income: 10000,
+                           outgo: 2000)
+        end
+
+        it "returns the monthly balance." do
+          mb = @model.find_or_initialize_monthly_balance
+          expect(mb.id).to eq @exists.id
+        end
+      end
+
+      context "when the monthly balance not exists," do
+        it "returns new instance of monthly balance." do
+          mb = @model.find_or_initialize_monthly_balance
+          expect(mb).to be_instance_of MonthlyBalance
+          expect(mb.persisted?).to be_falsy
+          expect(mb.user_id).to eq @model.user_id
+          expect(mb.date.year).to eq @model.date.year
+          expect(mb.date.month).to eq @model.date.month
+          expect(mb.date.day).to eq 1
+          expect(mb.income).to eq 0
+          expect(mb.outgo).to eq 0
+        end
+      end
+    end
+  end
 end

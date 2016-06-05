@@ -1,4 +1,7 @@
 class Income < ActiveRecord::Base
+  # concerns.
+  include InfluentialInBalance
+
   # associations.
   belongs_to :user
   belongs_to :category
