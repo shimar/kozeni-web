@@ -1,2 +1,2 @@
-class MonthlyBalance < ActiveRecord::Base
+class MonthlyBalance < Balance
 end
