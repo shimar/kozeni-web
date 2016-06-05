@@ -93,5 +93,35 @@ RSpec.describe Income, type: :model do
         end
       end
     end
+
+    describe "update_monthly_balance!" do
+      before do
+        @user = create(:user, password: 'testtest', password_confirmation: 'testtest')
+        @model = build(:income, user_id: @user.id, amount: 100)
+
+        create(:income, user_id: @user.id, date: Date.today, amount: 1)
+        create(:outgo, user_id: @user.id, date: Date.today, amount: -1)
+      end
+
+      it "saves the monthly balance record." do
+        expect {
+          @model.update_monthly_balance!
+        }.to change {
+          MonthlyBalance.count
+        }.from(0).to(1)
+      end
+
+      it "calculates the summary of incomes." do
+        @model.update_monthly_balance!
+        mb = @model.find_or_initialize_monthly_balance
+        expect(mb.income).to eq 1
+      end
+
+      it "calculates the summary of outgoes." do
+        @model.update_monthly_balance!
+        mb = @model.find_or_initialize_monthly_balance
+        expect(mb.outgo).to eq -1
+      end
+    end
   end
 end

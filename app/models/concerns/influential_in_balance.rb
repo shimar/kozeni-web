@@ -16,8 +16,12 @@ module InfluentialInBalance
       mb
     end
 
-    def update_monthly_balance
-      # TODO
+    def update_monthly_balance!
+      mb = find_or_initialize_monthly_balance
+      user = self.user
+      mb.income = user.incomes.ym(self.date).sum_amount
+      mb.outgo  = user.outgoes.ym(self.date).sum_amount
+      mb.save!
     end
   end
 
