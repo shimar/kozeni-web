@@ -1,4 +1,7 @@
 class Outgo < ActiveRecord::Base
+  # concerns.
+  include InfluentialInBalance
+
   # associations.
   belongs_to :user
   belongs_to :category
@@ -15,4 +18,7 @@ class Outgo < ActiveRecord::Base
   scope :amount_by_day, -> {
     group(:date).sum(:amount)
   }
+
+  # callbacks.
+  after_save :update_monthly_balance!
 end

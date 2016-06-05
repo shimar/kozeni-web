@@ -18,4 +18,8 @@ class Income < ActiveRecord::Base
   scope :amount_by_day, -> {
     group(:date).sum(:amount)
   }
+
+  # callbacks.
+  after_save :update_monthly_balance!
+
 end
