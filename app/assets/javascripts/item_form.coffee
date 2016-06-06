@@ -53,7 +53,8 @@ ItemForm = () ->
     this.outgoApi.create(this.form, this.onSuccess, this.onError)
 
   this.onSuccess = (data, dataType) =>
-    console.log(data)
+    this.categoryField.val('')
+    this.amountField.val('')
 
   this.onError = (xhr, status, error) =>
     console.log(status)
