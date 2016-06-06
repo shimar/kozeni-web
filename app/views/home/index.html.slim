@@ -1,6 +1,8 @@
 .row
-  .col-md-12
+  .col-md-10
     = l(@date.to_date)
+  .col-md-1
+    = number_with_delimiter @sum_incomes + @sum_outgoes
 
 .row
   .col-md-3
