@@ -4,8 +4,9 @@ div.item_form-block
     .form-group
       = f.input_field :date, class: 'form-control', data: { date_format: 'YYYY/MM/DD' }
 
-    .form-group
+    .form-group.dropdown
       = f.input_field :category, class: 'form-control'
+      ul#categories-dropdown.dropdown-menu
 
     .form-group
       = f.input_field :amount, as: :integer, class: 'form-control'

@@ -26,9 +26,23 @@ OutgoApi = () ->
     })
   return this
 
+CategoryApi = () ->
+  this.endpoint = '/categories'
+  this.get = (value, success, error) =>
+    $.ajax({
+      url: this.endpoint,
+      type: 'GET',
+      dataType: 'json',
+      data: {q: value},
+      success: success,
+      error: error
+    })
+  return this
+
 ItemForm = () ->
   this.incomeApi     = new IncomeApi()
   this.outgoApi      = new OutgoApi()
+  this.categoryApi   = new CategoryApi()
   this.form          = $('#new_item_form')
   this.dateField     = $('#item_form_date')
   this.categoryField = $('#item_form_category')
@@ -37,6 +51,7 @@ ItemForm = () ->
   this.init = () ->
     this.dateField.datetimepicker()
     this.form.on('submit', this.onSubmit)
+    this.categoryField.on('keyup', this.onCategoryChanged)
 
   this.onSubmit = (e) =>
     e.preventDefault()
@@ -58,6 +73,34 @@ ItemForm = () ->
 
   this.onError = (xhr, status, error) =>
     console.log(status)
+
+  this.onCategoryChanged = (e) =>
+    value = $(e.target).val()
+    if value is ""
+      return
+    this.categoryApi.get(value, this.onSuccessGetCategories, this.onErrorGetCategories)
+
+  this.onSuccessGetCategories = (data) =>
+    categories = $('#categories-dropdown')
+    categories.html('')
+    categories.hide()
+    applyCategory = this.applyCategory
+    $.each(data, () ->
+      item = $('<li></li>')
+      anchor = $('<a href="#">' + this.name + '</a>')
+      anchor.on('click', applyCategory)
+      item.append(anchor)
+      categories.append(item)
+    )
+    categories.show()
+    
+  this.onErrorGetCategories = (xhr, status, error) =>
+    console.log(status)
+
+  this.applyCategory = (e) =>
+    this.categoryField.val($(e.target).text())
+    $('#categories-dropdown').hide()
+    # this.categoryField.val()
 
   return this
 
