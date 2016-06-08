@@ -77,6 +77,9 @@ ItemForm = () ->
   this.onCategoryChanged = (e) =>
     value = $(e.target).val()
     if value is ""
+      categories = $('#categories-dropdown')
+      categories.html('')
+      categories.hide()
       return
     this.categoryApi.get(value, this.onSuccessGetCategories, this.onErrorGetCategories)
 
@@ -95,6 +98,9 @@ ItemForm = () ->
     categories.show()
     
   this.onErrorGetCategories = (xhr, status, error) =>
+    categories = $('#categories-dropdown')
+    categories.html('')
+    categories.hide()
     console.log(status)
 
   this.applyCategory = (e) =>
