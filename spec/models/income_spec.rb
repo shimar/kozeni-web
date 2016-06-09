@@ -15,9 +15,57 @@ RSpec.describe Income, type: :model do
     end
   end
 
+  describe "validations" do
+    before do
+      @model = Income.new
+    end
+
+    describe "user_id" do
+      it "is required." do
+        @model.valid?
+        expect(@model.errors.key?(:user_id)).to be_truthy
+        @model.user_id = 1
+        @model.valid?
+        expect(@model.errors.key?(:user_id)).to be_falsy
+      end
+    end
+
+    describe "category_id" do
+      it "is required." do
+        @model.valid?
+        expect(@model.errors.key?(:category_id)).to be_truthy
+        @model.category_id = 1
+        @model.valid?
+        expect(@model.errors.key?(:category_id)).to be_falsy
+      end
+    end
+
+    describe "amount" do
+      it "is required." do
+        @model.valid?
+        expect(@model.errors.key?(:amount)).to be_truthy
+        @model.amount = 0
+        @model.valid?
+        expect(@model.errors.key?(:amount)).to be_falsy
+      end
+    end
+
+    describe "date" do
+      it "is required." do
+        @model.valid?
+        expect(@model.errors.key?(:date)).to be_truthy
+        @model.date = Date.today
+        @model.valid?
+        expect(@model.errors.key?(:date)).to be_falsy
+      end
+    end
+  end
+
+
   describe "scopes" do
     describe "ym" do
       before do
+        create(:user, id: 1, password: 'testtest', password_confirmation: 'testtest')
         create(:income)
         create(:income, date: Date.today - 1.months)
       end
@@ -29,6 +77,7 @@ RSpec.describe Income, type: :model do
 
     describe "sum_amount" do
       before do
+        create(:user, id: 1, password: 'testtest', password_confirmation: 'testtest')
         create(:income, amount: 100)
         create(:income, amount: 200)
       end
@@ -40,6 +89,7 @@ RSpec.describe Income, type: :model do
 
     describe "amount_by_day" do
       before do
+        create(:user, id: 1, password: 'testtest', password_confirmation: 'testtest')
         create(:income, date: Date.today - 1.days, amount: 100)
         create(:income, date: Date.today - 1.days, amount: 200)
         create(:income, date: Date.today, amount: 300)
@@ -96,11 +146,8 @@ RSpec.describe Income, type: :model do
 
     describe "update_monthly_balance!" do
       before do
-        @user = create(:user, password: 'testtest', password_confirmation: 'testtest')
-        @model = build(:income, user_id: @user.id, amount: 100)
-
-        create(:income, user_id: @user.id, date: Date.today, amount: 1)
-        create(:outgo, user_id: @user.id, date: Date.today, amount: -1)
+        @user  = create(:user, password: 'testtest', password_confirmation: 'testtest')
+        @model = build(:income, user_id: @user.id, amount: 100, category_id: 1)
       end
 
       it "saves the monthly balance record." do
@@ -111,16 +158,28 @@ RSpec.describe Income, type: :model do
         }.from(0).to(1)
       end
 
-      it "calculates the summary of incomes." do
-        @model.update_monthly_balance!
-        mb = @model.find_or_initialize_monthly_balance
-        expect(mb.income).to eq 1
+      describe do
+        before do
+          create(:income, user_id: @user.id, amount: 1, date: Date.today)
+        end
+
+        it "calculates the summary of incomes." do
+          @model.update_monthly_balance!
+          mb = @model.find_or_initialize_monthly_balance
+          expect(mb.income).to eq 1
+        end
       end
 
-      it "calculates the summary of outgoes." do
-        @model.update_monthly_balance!
-        mb = @model.find_or_initialize_monthly_balance
-        expect(mb.outgo).to eq -1
+      describe do
+        before do
+          create(:outgo, user_id: @user.id, amount: -1, date: Date.today)
+        end
+
+        it "calculates the summary of outgoes." do
+          @model.update_monthly_balance!
+          mb = @model.find_or_initialize_monthly_balance
+          expect(mb.outgo).to eq -1
+        end
       end
     end
   end
