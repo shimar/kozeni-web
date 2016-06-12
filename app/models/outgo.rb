@@ -6,6 +6,16 @@ class Outgo < ActiveRecord::Base
   belongs_to :user
   belongs_to :category
 
+  # validations.
+  validates :user_id,
+            presence: true
+  validates :category_id,
+            presence: true
+  validates :amount,
+            presence: true
+  validates :date,
+            presence: true
+
   # scopes.
   scope :ym, -> (date) {
     where("YEAR(date) = ? AND MONTH(date) = ?", date.year, date.month)
