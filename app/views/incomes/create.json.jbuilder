@@ -9,6 +9,5 @@ if @income.errors.empty?
         :created_at,
         :updated_at)
 else
-  json.(@income,
-        :errors)
+  json.errors @income.errors.full_messages
 end
