@@ -9,6 +9,5 @@ if @outgo.errors.empty?
         :created_at,
         :updated_at)
 else
-  json.(@outgo,
-        :errors)
+  json.errors @outgo.errors.full_messages
 end

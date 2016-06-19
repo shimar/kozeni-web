@@ -8,11 +8,13 @@ class OutgoesController < ApplicationController
   end
 
   def create
+    @status = 201
     category_name = outgo_params[:category]
     category = current_user.categories.find_or_create_by(name: category_name)
     @outgo = Outgo.new(user_id: current_user.id, date: outgo_params[:date], amount: outgo_params[:amount])
     @outgo.category = category
-    @outgo.save
+    @status = 422 unless @outgo.save
+    render status: @status
   end
 
   def update
