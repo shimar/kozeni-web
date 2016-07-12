@@ -72,7 +72,15 @@ ItemForm = () ->
     this.amountField.val('')
 
   this.onError = (xhr, status, error) =>
-    console.log(status)
+    $('#new_item_form div.alert').remove()
+    block = $('<div class="alert alert-danger"></div>')
+    errors = $('<ul></ul>');
+    res = $.parseJSON(xhr.responseText)
+    $.each(res.errors, (v) ->
+      errors.append('<li>' + res.errors[v] + '</li>')
+    )
+    block.append(errors)
+    $('#new_item_form').prepend(block)
 
   this.onCategoryChanged = (e) =>
     value = $(e.target).val()
