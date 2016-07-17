@@ -1,6 +1,9 @@
 class IncomesController < ApplicationController
   layout false
 
+  def index
+  end
+
   def create
     @status = 201
     category_name = income_params[:category]
