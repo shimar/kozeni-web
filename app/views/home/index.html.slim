@@ -11,12 +11,16 @@
     h4 outgoes
   .col-md-3
     h4 incomes
-    div
-      = number_with_delimiter @sum_incomes
+    div.text-center
+      canvas#income-chart(width=200 height=200)
+      div.text-right
+        = number_with_delimiter @sum_incomes
   .col-md-3
     h4 outgoes
-    div
-      = number_with_delimiter @sum_outgoes
+    div.text-center
+      canvas#outgo-chart(width=200 height=200)
+      div.text-right
+        = number_with_delimiter @sum_outgoes
 
 .row
   .col-md-12.text-center
