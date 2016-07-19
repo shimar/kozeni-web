@@ -1,6 +1,15 @@
 IncomeApi = () ->
   this.endpoint = '/incomes'
 
+  this.index = (success, error) =>
+    $.ajax({
+      url: this.endpoint,
+      type: 'GET',
+      dataType: 'json',
+      success: success,
+      error:   error
+    })
+
   this.create = (form, success, error) =>
     $.ajax({
       url: this.endpoint,
@@ -52,6 +61,7 @@ ItemForm = () ->
     this.dateField.datetimepicker()
     this.form.on('submit', this.onSubmit)
     this.categoryField.on('keyup', this.onCategoryChanged)
+    this.incomeApi.index()
 
   this.onSubmit = (e) =>
     e.preventDefault()
