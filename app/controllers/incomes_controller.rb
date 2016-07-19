@@ -2,6 +2,7 @@ class IncomesController < ApplicationController
   layout false
 
   def index
+    @incomes = current_user.incomes.group(:category_id).sum(:amount)
   end
 
   def create
