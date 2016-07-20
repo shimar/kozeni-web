@@ -1,9 +1,3 @@
 table#balances.table.table-condensed.table-striped
   - @balances.each do |day, values|
-    tr
-      td
-        = day.day
-      td
-        = number_with_delimiter values[:incomes]
-      td
-        = number_with_delimiter values[:outgoes]
+    = render "daily_balance_item", { day: day, values: values }
