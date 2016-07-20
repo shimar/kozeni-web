@@ -11,7 +11,27 @@ ItemForm = () ->
     this.dateField.datetimepicker()
     this.form.on('submit', this.onSubmit)
     this.categoryField.on('keyup', this.onCategoryChanged)
-    this.incomeApi.index()
+    this.incomeApi.index((data) ->
+      data = {
+        labels: data.categories,
+        datasets: [
+          data: data.amounts
+        ]
+      }
+      options = {
+        legend: {
+          position: 'bottom'
+        }
+      }
+      ctx = $('#income-chart')
+      chart = new Chart(ctx, {
+        type: 'pie',
+        data: data,
+        options: options
+      })
+    , (data) ->
+      console.log(data)
+    )
 
   this.onSubmit = (e) =>
     e.preventDefault()

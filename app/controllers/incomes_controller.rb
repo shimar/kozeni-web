@@ -3,6 +3,9 @@ class IncomesController < ApplicationController
 
   def index
     @incomes = current_user.incomes.group(:category_id).sum(:amount)
+    @categories = @incomes.keys
+    @categories = current_user.categories.where(id: @categories).map(&:name)
+    @amounts    = @incomes.values
   end
 
   def create
