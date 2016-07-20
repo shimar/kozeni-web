@@ -1,5 +1,15 @@
 @OutgoApi = () ->
   this.endpoint = '/outgoes'
+
+  this.index = (success, error) =>
+    $.ajax({
+      url: this.endpoint,
+      type: 'GET',
+      dataType: 'json',
+      success: success,
+      error:   error
+    })
+
   this.create = (form, success, error) =>
     $.ajax({
       url: this.endpoint,
@@ -10,4 +20,3 @@
       error:   error
     })
   return this
-

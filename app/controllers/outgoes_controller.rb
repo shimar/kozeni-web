@@ -2,6 +2,9 @@ class OutgoesController < ApplicationController
   layout false
 
   def index
+    @outgoes    = current_user.outgoes.group(:category_id).sum(:amount)
+    @categories = current_user.categories.where(id: @outgoes.keys).map(&:name)
+    @amounts    = @outgoes.values
   end
 
   def show
