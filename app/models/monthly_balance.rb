@@ -1,2 +1,0 @@
-class MonthlyBalance < Balance
-end
